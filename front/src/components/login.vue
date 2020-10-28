@@ -1,5 +1,5 @@
 <template>
-<div>
+<div>log
 </div>
 
 </template>

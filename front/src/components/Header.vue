@@ -1,13 +1,16 @@
 <template>
 <div class = "header">
   <div>
-    <img class = "logo" src = "../assets/logo.png">
+    <router-link to="/">
+    <img class = "logo" src = "../assets/icon.png">
+    </router-link>
   </div>
   <div class = "buttons">
-    <div class = "but">Auth</div>
-    <div class = "but">Login</div>
-    <div class = "but">Auccion</div>
+    <router-link to="/auth" class = "but">Auth</router-link>
+    <router-link to="/login" class = "but">Login</router-link>
+    <router-link to="/auccion" class = "but">Auccion</router-link>
   </div>
+  <router-view></router-view>
 </div>
 
 </template>
@@ -30,7 +33,7 @@ export default {
 <style scoped>
 .header{
   height:50px;
-  background-color: aqua ;
+  background-color: #bd7c63 ;
 }
 .logo{
   margin-left: 5vw;
@@ -46,10 +49,11 @@ export default {
   font-size: 210%;
   margin-left: 11vw;
   padding:6px;
-  color: #5f6bff;
+  color: #ffe588;
+  text-decoration: none;
 }
 .but:hover{
-  background-color: #50d2d2;
+  background-color: #ad704d;
   border-radius: 20%;
 }
 </style>
