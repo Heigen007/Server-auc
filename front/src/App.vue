@@ -2,8 +2,8 @@
   <div class="home">
     <Header />
     <div class = "a"></div>
+    <router-view :root="root" :users="UsersList" @clickBTN="auth"></router-view>
   </div>
-
 </template>
 
 <script>
@@ -16,13 +16,29 @@ export default {
   },
   data: function () {
     return {
+      root: 'http://localhost:3000/',
+      user: '',
+      MessagesList: null,
+      UsersList: []
     }
   },
   computed: {},
   watch: {},
   methods: {
+    auth (a) {
+      this.user = a
+    }
   },
   async beforeMount () {
+    setInterval(async () => {
+      const response = await fetch(this.root)
+      if (response.ok) {
+        const data = await response.json()
+        this.UsersList = data.users
+        this.MessagesList = data.messages
+        console.log(2)
+      }
+    }, 1000)
   }
 }
 </script>

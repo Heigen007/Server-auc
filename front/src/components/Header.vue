@@ -10,7 +10,6 @@
     <router-link to="/login" class = "but">Login</router-link>
     <router-link to="/auccion" class = "but">Auccion</router-link>
   </div>
-  <router-view></router-view>
 </div>
 
 </template>
