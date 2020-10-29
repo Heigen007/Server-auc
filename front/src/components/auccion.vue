@@ -1,5 +1,6 @@
 <template>
-<div>Auction
+<div>
+  <div class="app">Auccion</div>
 </div>
 
 </template>
@@ -19,5 +20,9 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
+.app{
+  text-align: center;
+  font-size: 300%;
+}
 </style>

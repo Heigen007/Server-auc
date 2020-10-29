@@ -54,6 +54,6 @@ export default {
 }
 .but:hover{
   background-color: #ad704d;
-  border-radius: 20%;
+  border-radius: 20px;
 }
 </style>

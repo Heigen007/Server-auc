@@ -35,7 +35,7 @@ body{
   z-index: 10;
 }
 .a {
-  background: url("https://lh3.googleusercontent.com/proxy/kUpkVs7erwso24j8ovBOhSymSwzlBMnP7DWvwyzrUFHmLA3c4FbbMpdVA1q6ct9K6okGd6MHY-LN2TxTBwYHURtRcCl76N89cVWVekS18rhWoz-CkFmpOWeqwUE") no-repeat ;
+  background: url(assets/img.jpg) no-repeat ;
   width: 100%;
   background-size: cover;
   height: 100vh;
