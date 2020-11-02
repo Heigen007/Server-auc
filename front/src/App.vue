@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Header />
+    <Header :user="user"/>
     <div class = "a"></div>
     <router-view :root="root" :users="UsersList" @clickBTN="auth"></router-view>
   </div>

@@ -4,13 +4,12 @@
   <input type="text" id = 'log' autocomplete="off" placeholder="Логин:">
   <input type="text" id = 'pas' autocomplete="off" placeholder="Пароль:">
   <div class = "c"><button class = "but"  @click="click">Войти</button></div>
-  <div class="mistake" v-if="showmiHei">Введите верный логин и пароль!</div>
+  <div class="mistake" v-if="showmi">Введите верный логин и пароль!</div>
 </div>
 
 </template>
 
 <script>
-
 export default {
   name: 'HelloWorld',
   props: {
@@ -27,23 +26,26 @@ export default {
   },
   methods: {
     click () {
-      this.NameCorrect = false
+      this.UserCorrect = false
       const dar = document.getElementById('log')
       const pas = document.getElementById('pas')
-      if (dar.value && pas.value) {
+      if (dar.value) {
         this.users.forEach(element => {
-          if (element.name === dar.value) {
-            this.NameCorrect = true
+          if (element.name === dar.value && element.pas === pas.value) {
+            console.log(1)
+            this.UserCorrect = true
           }
         })
       }
-      if (this.NameCorrect === false) {
-        this.showmiHei = true
+      if (this.UserCorrect === false) {
+        this.showmi = true
       } else if (dar.value && pas.value) {
         this.$emit('clickBTN', dar.value)
-        this.showmiHei = false
+        dar.value = ''
+        pas.value = ''
+        this.showmi = false
       } else {
-        this.showmiHei = false
+        this.showmi = true
       }
     },
     submit () {

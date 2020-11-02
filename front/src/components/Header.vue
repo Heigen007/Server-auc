@@ -9,6 +9,7 @@
     <router-link to="/auth" class = "but">Auth</router-link>
     <router-link to="/login" class = "but">Login</router-link>
     <router-link to="/auccion" class = "but">Auccion</router-link>
+    <router-link to="/newAuccion" class = "but" v-if="user=='AdMiN'">NA</router-link>
   </div>
 </div>
 
@@ -19,6 +20,7 @@
 export default {
   name: 'MainStr',
   props: {
+    user: String
   },
   data: function () {
     return {

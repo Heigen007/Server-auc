@@ -5,6 +5,7 @@ import auth from '../components/auth.vue'
 import login from '../components/login.vue'
 import auccion from '../components/auccion.vue'
 import Hello from '../components/hello.vue'
+import newAuccion from '../components/newAuccion.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/auccion',
     name: 'auccion',
     component: auccion
+  },
+  {
+    path: '/newAuccion',
+    name: 'newAuccion',
+    component: newAuccion
   }
 ]
 
