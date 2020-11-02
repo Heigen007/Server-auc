@@ -42,13 +42,13 @@ export default {
   float: left;
 }
 .buttons{
-  margin-left: 25vw;
+  margin-left: 20vw;
   display: flex;
   flex-direction: row;
 }
 .but{
   font-size: 210%;
-  margin-left: 11vw;
+  margin-left: 8vw;
   padding:6px;
   color: #ffe588;
   text-decoration: none;

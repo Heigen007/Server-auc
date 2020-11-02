@@ -59,18 +59,18 @@ export default {
 input{
     border: 5px solid #981500;
     width: 20vw;
-    height:7vh;
-    font-size: 6vh;
+    height:6vh;
+    font-size: 5vh;
     margin-top: 2%;
     border-radius: 10px;
     color: #483916;
     outline: none;
 }
-.input:hover{
+input:hover{
   border-color: #ff4c4c;
 }
 .text{
-  font-size: 15vh;
+  font-size: 12vh;
   color: #e28a61;
 }
 .but{

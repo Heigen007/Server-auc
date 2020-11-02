@@ -2,7 +2,7 @@
   <div class="home">
     <Header :user="user"/>
     <div class = "a"></div>
-    <router-view :root="root" :users="UsersList" @clickBTN="auth"></router-view>
+    <router-view :minut="minut" :hour="hour" :auc="auc" :user="user" :root="root" :users="UsersList" @clickBTN="auth"></router-view>
   </div>
 </template>
 
@@ -19,7 +19,10 @@ export default {
       root: 'http://localhost:3000/',
       user: '',
       MessagesList: null,
-      UsersList: []
+      UsersList: [],
+      auc: {},
+      hour: null,
+      minut: null
     }
   },
   computed: {},
@@ -36,7 +39,9 @@ export default {
         const data = await response.json()
         this.UsersList = data.users
         this.MessagesList = data.messages
-        console.log(2)
+        this.auc = data.auc[0]
+        this.hour = data.auc[0].time.hour
+        this.minut = data.auc[0].time.minut
       }
     }, 1000)
   }

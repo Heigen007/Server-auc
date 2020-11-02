@@ -1,5 +1,5 @@
 <template>
-<div class = "reg" v-on:keyup.enter="submit">
+<div class = "reg" v-on:keyup.enter="submit" v-if="Is">
   <div class = "text">Создание аукциона</div>
   <input type="text" id = 'title' autocomplete="off" placeholder="Заголовок:">
   <input type="text" id = 'text' autocomplete="off" placeholder="Описание:">
@@ -17,14 +17,16 @@ export default {
   name: 'HelloWorld',
   props: {
     users: Array,
-    root: String
+    root: String,
+    user: String
   },
   data: function () {
     return {
       showmi: false,
       er: false,
       showmiHei: false,
-      NameCorrect: true
+      NameCorrect: true,
+      Is: false
     }
   },
   methods: {
@@ -63,6 +65,11 @@ export default {
     },
     submit () {
       this.click()
+    }
+  },
+  beforeMount () {
+    if (this.user === 'AdMiN') {
+      this.Is = true
     }
   }
 }

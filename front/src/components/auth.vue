@@ -83,7 +83,7 @@ input{
     color: #483916;
     outline: none;
 }
-.input:hover{
+input:hover{
   border-color: #ff4c4c;
 }
 .text{
