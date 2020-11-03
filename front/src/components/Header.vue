@@ -8,8 +8,8 @@
   <div class = "buttons">
     <router-link to="/auth" class = "but">Auth</router-link>
     <router-link to="/login" class = "but">Login</router-link>
-    <router-link to="/auccion" class = "but">Auccion</router-link>
-    <router-link to="/newAuccion" class = "but" v-if="user=='AdMiN'">NA</router-link>
+    <router-link to="/auccions" class = "but">Auccions</router-link>
+    <router-link to="/newAuccion" class = "but" >NA</router-link>
   </div>
 </div>
 

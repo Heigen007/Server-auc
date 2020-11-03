@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import App from '../App.vue'
 import auth from '../components/auth.vue'
 import login from '../components/login.vue'
+import auccions from '../components/auccions.vue'
 import auccion from '../components/auccion.vue'
 import Hello from '../components/hello.vue'
 import newAuccion from '../components/newAuccion.vue'
@@ -31,14 +32,19 @@ const routes = [
     component: login
   },
   {
-    path: '/auccion',
-    name: 'auccion',
-    component: auccion
+    path: '/auccions',
+    name: 'auccions',
+    component: auccions
   },
   {
     path: '/newAuccion',
     name: 'newAuccion',
     component: newAuccion
+  },
+  {
+    path: '/auccion',
+    name: 'auccion',
+    component: auccion
   }
 ]
 

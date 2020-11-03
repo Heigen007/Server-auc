@@ -2,7 +2,7 @@
   <div class="home">
     <Header :user="user"/>
     <div class = "a"></div>
-    <router-view :minut="minut" :hour="hour" :auc="auc" :user="user" :root="root" :users="UsersList" @clickBTN="auth"></router-view>
+    <router-view :aucId="aucId" :auc="auc" :user="user" :root="root" :users="UsersList" @clickBTN="auth" @auccion="myauc"></router-view>
   </div>
 </template>
 
@@ -20,9 +20,8 @@ export default {
       user: '',
       MessagesList: null,
       UsersList: [],
-      auc: {},
-      hour: null,
-      minut: null
+      auc: [],
+      aucId: null
     }
   },
   computed: {},
@@ -30,6 +29,9 @@ export default {
   methods: {
     auth (a) {
       this.user = a
+    },
+    myauc (id) {
+      this.aucId = id
     }
   },
   async beforeMount () {
@@ -39,9 +41,8 @@ export default {
         const data = await response.json()
         this.UsersList = data.users
         this.MessagesList = data.messages
-        this.auc = data.auc[0]
-        this.hour = data.auc[0].time.hour
-        this.minut = data.auc[0].time.minut
+        this.auc = data.auc
+        console.log(data.auc)
       }
     }, 1000)
   }
@@ -56,11 +57,11 @@ body{
   z-index: 10;
 }
 .a {
-  background: url(assets/img.jpg) no-repeat ;
+  background: url(assets/img.jpg);
   width: 100%;
   background-size: cover;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   filter: blur(5px);
   z-index: -10;
   top:0;
