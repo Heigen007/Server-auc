@@ -6,7 +6,7 @@
     <div class="text but"><b>Описание: </b>{{auc[aucId].text}}</div>
     <div class="price but"><b>Цена: </b>{{auc[aucId].price}}</div>
     <div class="step but"><b>Шаг: </b>{{auc[aucId].step}}</div>
-    <div class="time but"><b>Время окончания: </b>{{auc[aucId].time.hour}}:{{auc[aucId].time.minut}}</div>
+    <div class="time but"><b>Время окончания: </b>{{auc[aucId].time.minut}}:{{auc[aucId].time.second}}</div>
     <div class="visit"><button class = "button">Войти</button></div>
   </div>
 </div>

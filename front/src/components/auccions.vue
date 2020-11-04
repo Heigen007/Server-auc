@@ -6,7 +6,7 @@
     <div class="text but"><b>Описание: </b>{{auc.text}}</div>
     <div class="price but"><b>Цена: </b>{{auc.price}}</div>
     <div class="step but"><b>Шаг: </b>{{auc.step}}</div>
-    <div class="time but"><b>Время окончания: </b>{{auc.time.hour}}:{{auc.time.minut}}</div>
+    <div class="time but"><b>Время окончания: </b>{{auc.time.minut}}:{{auc.time.second}}</div>
     <router-link to="/auccion" class="n"> <div @click="click(key)" :id="`${key}`" class="button">Войти</div> </router-link>
   </div>
 </div>

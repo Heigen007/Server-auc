@@ -5,6 +5,7 @@
   <textarea id = 'text' autocomplete="off" placeholder="Описание:"></textarea>
   <input type="number" id = 'price' autocomplete="off" placeholder="Цена:">
   <input type="number" id = 'step' autocomplete="off" placeholder="Шаг:">
+  <p><input type="file" name="image" id = "image" @change="change" ref = "text" multiple accept="image/*">
   <input type="number" id = 'time' autocomplete="off" placeholder="Время в минутах(не больше часа):" maxlength="60">
   <div class = "c"><button class = "but" @click="click">Создать</button></div>
   <div class="mistake" v-if="showmi">Введите верные данные!</div>
@@ -12,6 +13,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'HelloWorld',
   props: {
@@ -24,10 +26,17 @@ export default {
       showmi: false,
       er: false,
       showmiHei: false,
-      NameCorrect: true
+      NameCorrect: true,
+      image: null
     }
   },
   methods: {
+    change () {
+      if (this.$refs.text.files.length === null) this.image = null
+      else {
+        this.image = this.$refs.text.files
+      }
+    },
     click () {
       this.UserCorrect = false
       const title = document.getElementById('title')
@@ -35,14 +44,16 @@ export default {
       const price = document.getElementById('price')
       const step = document.getElementById('step')
       const time = document.getElementById('time')
-
+      const photo = document.getElementById('image')
+      const fileType = photo.value.split('\\')
       if (title.value && text.value && price.value && step.value && time.value) {
         const NA = {
           title: title.value,
           text: text.value,
           price: price.value,
           step: step.value,
-          time: time.value
+          time: time.value,
+          photo: fileType[2]
         }
         title.value = ''
         text.value = ''
@@ -56,6 +67,15 @@ export default {
           },
           body: JSON.stringify(NA)
         })
+        const formData = new FormData()
+        if (this.image) {
+          formData.append('image', this.image[0])
+          axios.post('http://localhost:3000/files', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+        }
         this.showmi = false
       } else {
         this.showmi = true
