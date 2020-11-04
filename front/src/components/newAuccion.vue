@@ -5,7 +5,7 @@
   <textarea id = 'text' autocomplete="off" placeholder="Описание:"></textarea>
   <input type="number" id = 'price' autocomplete="off" placeholder="Цена:">
   <input type="number" id = 'step' autocomplete="off" placeholder="Шаг:">
-  <input type="number" id = 'time' autocomplete="off" placeholder="Время:">
+  <input type="number" id = 'time' autocomplete="off" placeholder="Время в минутах(не больше часа):" maxlength="60">
   <div class = "c"><button class = "but" @click="click">Создать</button></div>
   <div class="mistake" v-if="showmi">Введите верные данные!</div>
 </div>
