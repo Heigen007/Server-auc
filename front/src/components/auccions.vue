@@ -4,6 +4,7 @@
   <div class="buttons" v-for="(auc, key) in auc" :key="key">
     <div class = "title but"><b>Название: </b>{{auc.title}}</div>
     <div class="text but"><b>Описание: </b>{{auc.text}}</div>
+    <img :src="`http://localhost:3000/${auc.photo}`">
     <div class="price but"><b>Цена: </b>{{auc.price}}</div>
     <div class="step but"><b>Шаг: </b>{{auc.step}}</div>
     <div class="time but"><b>Время окончания: </b>{{auc.time.minut}}:{{auc.time.second}}</div>
@@ -20,7 +21,8 @@ export default {
   props: {
     auc: Array,
     hour: Number,
-    minut: Number
+    minut: Number,
+    aucId: Number
   },
   methods: {
     click (id) {
@@ -66,5 +68,8 @@ export default {
   margin-top: 2vh;
   border-radius: 10px;
   padding: 1vh;
+}
+img{
+  width: 15vw;
 }
 </style>

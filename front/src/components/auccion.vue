@@ -1,13 +1,14 @@
 <template>
 <div>
   <div class="app">Auccion</div>
-  <div class="buttons">
+  <div class="buttons" v-if="auc[aucId].time.minut > 0 && auc[aucId].time.second > 0">
     <div class = "title but"><b>Название: </b>{{auc[aucId].title}}</div>
     <div class="text but"><b>Описание: </b>{{auc[aucId].text}}</div>
+    <img :src="`http://localhost:3000/${auc[aucId].photo}`">
     <div class="price but"><b>Цена: </b>{{auc[aucId].price}}</div>
     <div class="step but"><b>Шаг: </b>{{auc[aucId].step}}</div>
     <div class="time but"><b>Время окончания: </b>{{auc[aucId].time.minut}}:{{auc[aucId].time.second}}</div>
-    <div class="visit"><button class = "button">Войти</button></div>
+    <div class="bet"><button class = "betbtn">Поднять</button></div>
   </div>
 </div>
 
@@ -19,8 +20,6 @@ export default {
   name: 'MainStr',
   props: {
     auc: Array,
-    hour: Number,
-    minut: Number,
     aucId: Number
   },
   methods: {
@@ -51,5 +50,20 @@ export default {
   margin-top: 2vh;
   border-radius: 10px;
   padding: 1vh;
+}
+img{
+  width: 15vw;
+}
+.betbtn{
+  width: 15vw;
+  height: 5vh;
+  font-size: 2vw;
+  background-color: #ffa377;
+  border: 3px solid #8a2101;
+  color:#8a2101;
+  border-radius: 10px;
+}
+.betbtn:hover{
+      background-color: #ffc6ab;
 }
 </style>

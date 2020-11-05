@@ -1,12 +1,12 @@
 <template>
 <div class = "reg" v-on:keyup.enter="submit">
   <div class = "text">Создание аукциона</div>
-  <input type="text" id = 'title' autocomplete="off" placeholder="Заголовок:">
+  <input type="text" class = "input" id = 'title' autocomplete="off" placeholder="Заголовок:">
   <textarea id = 'text' autocomplete="off" placeholder="Описание:"></textarea>
-  <input type="number" id = 'price' autocomplete="off" placeholder="Цена:">
-  <input type="number" id = 'step' autocomplete="off" placeholder="Шаг:">
-  <p><input type="file" name="image" id = "image" @change="change" ref = "text" multiple accept="image/*">
-  <input type="number" id = 'time' autocomplete="off" placeholder="Время в минутах(не больше часа):" maxlength="60">
+  <input type="number" class = "input" id = 'price' autocomplete="off" placeholder="Цена:">
+  <input type="number" class = "input" id = 'step' autocomplete="off" placeholder="Шаг:">
+  <input type="file" class = "img" name="image" id = "image" @change="change" ref = "text" required multiple accept="image/*">
+  <input type="number" class = "input" id = 'time' autocomplete="off" placeholder="Время в минутах(не больше часа):" maxlength="60">
   <div class = "c"><button class = "but" @click="click">Создать</button></div>
   <div class="mistake" v-if="showmi">Введите верные данные!</div>
 </div>
@@ -69,7 +69,7 @@ export default {
         })
         const formData = new FormData()
         if (this.image) {
-          formData.append('image', this.image[0])
+          formData.append('image', this.image)
           axios.post('http://localhost:3000/files', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
@@ -101,7 +101,7 @@ textarea{
     color: #483916;
     outline: none;
 }
-input{
+.input{
     border: 5px solid #981500;
     width: 20vw;
     height:7vh;
@@ -142,4 +142,9 @@ input{
   margin-left: 10px;
   color:#b11000;
 }
+.img{
+  margin-top: 2vh;
+  border: 3px solid #981500;
+}
+
 </style>
