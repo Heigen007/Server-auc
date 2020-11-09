@@ -46,7 +46,7 @@ export default {
       const time = document.getElementById('time')
       const photo = document.getElementById('image')
       const fileType = photo.value.split('\\')
-      if (title.value && text.value && price.value && step.value && time.value) {
+      if (title.value && text.value && price.value && step.value && time.value && photo.value) {
         const NA = {
           title: title.value,
           text: text.value,
@@ -70,6 +70,7 @@ export default {
         const formData = new FormData()
         if (this.image) {
           formData.append('image', this.image)
+          console.log(formData)
           axios.post('http://localhost:3000/files', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
