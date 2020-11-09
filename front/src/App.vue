@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <Header :user="user"/>
+    <Header :user="user" :balance="balance"/>
     <div class = "a"></div>
-    <router-view :aucId="aucId" :auc="auc" :user="user" :root="root" :users="UsersList" @clickBTN="auth" @auccion="myauc"></router-view>
+    <router-view :aucId="aucId" :auc="auc" :user="user" :root="root" :users="UsersList" @clickBTN="auth" @auccion="myauc" @money="money"></router-view>
   </div>
 </template>
 
@@ -21,7 +21,8 @@ export default {
       MessagesList: null,
       UsersList: [],
       auc: [],
-      aucId: null
+      aucId: null,
+      balance: 0
     }
   },
   computed: {},
@@ -29,9 +30,13 @@ export default {
   methods: {
     auth (a) {
       this.user = a
+      this.balance = 2000
     },
     myauc (id) {
       this.aucId = id
+    },
+    money (a) {
+      this.balance = a
     }
   },
   async beforeMount () {
@@ -39,10 +44,8 @@ export default {
       const response = await fetch(this.root)
       if (response.ok) {
         const data = await response.json()
-        this.UsersList = data.users
-        this.MessagesList = data.messages
+        this.UsersList = data.user
         this.auc = data.auc
-        console.log(data.auc)
       }
     }, 1000)
   }

@@ -1,14 +1,15 @@
 <template>
 <div>
-  <div class="app">Auccion</div>
-  <div class="buttons" v-if="auc[aucId].time.minut > 0 && auc[aucId].time.second > 0">
+  <div class="app" >Auccion</div>
+  <div class="buttons" v-if="auc[aucId].time.minut >= 0 && auc[aucId].time.second > 0">
     <div class = "title but"><b>Название: </b>{{auc[aucId].title}}</div>
     <div class="text but"><b>Описание: </b>{{auc[aucId].text}}</div>
     <img :src="`http://localhost:3000/${auc[aucId].photo}`">
     <div class="price but"><b>Цена: </b>{{auc[aucId].price}}</div>
     <div class="step but"><b>Шаг: </b>{{auc[aucId].step}}</div>
     <div class="time but"><b>Время окончания: </b>{{auc[aucId].time.minut}}:{{auc[aucId].time.second}}</div>
-    <div class="bet"><button class = "betbtn">Поднять</button></div>
+    <div class="bet"><button class = "betbtn" @click="click">Поднять</button></div>
+    <div class="but">Последнюю ставку сделал: {{auc[aucId].better}}</div>
   </div>
 </div>
 
@@ -20,9 +21,47 @@ export default {
   name: 'MainStr',
   props: {
     auc: Array,
-    aucId: Number
+    aucId: Number,
+    user: String,
+    root: String,
+    money: Number
   },
   methods: {
+    click () {
+      if (this.user != null) {
+        const Bet = {
+          price: this.auc[this.aucId].price + this.auc[this.aucId].step,
+          better: this.user,
+          title: this.auc[this.aucId].title
+        }
+        fetch(`${this.root}bet`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify(Bet)
+        })
+      }
+    }
+  },
+  watch: {
+    // whenever question changes, this function will run
+    auc: function (newV, oldV) {
+      if (this.auc[this.aucId].time.second === 1 && this.auc[this.aucId].time.minut === 0) {
+        const Buy = {
+          price: this.money - this.auc[this.aucId].price,
+          better: this.user,
+          title: this.auc[this.aucId].title
+        }
+        fetch(`${this.root}buy`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify(Buy)
+        })
+      }
+    }
   }
 }
 </script>

@@ -34,6 +34,7 @@ export default {
           if (element.name === dar.value && element.pas === pas.value) {
             console.log(1)
             this.UserCorrect = true
+            this.$emit('money', element.money)
           }
         })
       }

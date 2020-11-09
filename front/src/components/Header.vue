@@ -10,6 +10,7 @@
     <router-link to="/login" class = "but">Login</router-link>
     <router-link to="/auccions" class = "but">Auccions</router-link>
     <router-link to="/newAuccion" class = "but" >NA</router-link>
+    <div class="but bal">{{balance}}</div>
   </div>
 </div>
 
@@ -20,7 +21,8 @@
 export default {
   name: 'MainStr',
   props: {
-    user: String
+    user: String,
+    balance: Number
   },
   data: function () {
     return {
@@ -57,4 +59,12 @@ export default {
   background-color: #ad704d;
   border-radius: 20px;
 }
+.bal{
+  font-size: 210%;
+  margin-left: 8vw;
+  padding:6px;
+  color: #ff9691;
+  text-decoration: none;
+}
+
 </style>

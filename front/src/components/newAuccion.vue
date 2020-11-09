@@ -1,5 +1,5 @@
 <template>
-<div class = "reg" v-on:keyup.enter="submit">
+<div class = "reg" v-on:keyup.enter="submit" v-if="user != ''">
   <div class = "text">Создание аукциона</div>
   <input type="text" class = "input" id = 'title' autocomplete="off" placeholder="Заголовок:">
   <textarea id = 'text' autocomplete="off" placeholder="Описание:"></textarea>
@@ -34,7 +34,7 @@ export default {
     change () {
       if (this.$refs.text.files.length === null) this.image = null
       else {
-        this.image = this.$refs.text.files
+        this.image = this.$refs.text.files[0]
       }
     },
     click () {
@@ -46,14 +46,15 @@ export default {
       const time = document.getElementById('time')
       const photo = document.getElementById('image')
       const fileType = photo.value.split('\\')
-      if (title.value && text.value && price.value && step.value && time.value && photo.value) {
+      if (title.value && text.value && price.value && step.value && time.value && photo.value && time.value < 61) {
         const NA = {
           title: title.value,
           text: text.value,
           price: price.value,
           step: step.value,
           time: time.value,
-          photo: fileType[2]
+          photo: fileType[2],
+          better: 'nobody bet'
         }
         title.value = ''
         text.value = ''
@@ -67,10 +68,9 @@ export default {
           },
           body: JSON.stringify(NA)
         })
-        const formData = new FormData()
         if (this.image) {
+          const formData = new FormData()
           formData.append('image', this.image)
-          console.log(formData)
           axios.post('http://localhost:3000/files', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
