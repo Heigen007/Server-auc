@@ -46,7 +46,7 @@ export default {
       const time = document.getElementById('time')
       const photo = document.getElementById('image')
       const fileType = photo.value.split('\\')
-      if (title.value && text.value && price.value && step.value && time.value && photo.value && time.value < 61 && step.value <= 500 && price.value <= 1500) {
+      if (title.value && text.value && price.value && step.value && time.value && photo.value && time.value < 61 && step.value <= 500 && price.value <= 1500 && step.value > 0 && price.value > 0 && time.value > 0) {
         const NA = {
           title: title.value,
           text: text.value,

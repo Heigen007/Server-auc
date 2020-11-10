@@ -56,7 +56,7 @@ export default {
     // whenever question changes, this function will run
     auc: function (newV, oldV) {
       if (this.auc[this.aucId].time.second === 1 && this.auc[this.aucId].time.minut === 0) {
-        if (this.auc[this.aucId].better === this.user) {
+        if (this.auc[this.aucId].better === this.user && this.balance - this.auc[this.aucId].price >= 0) {
           const Buy = {
             price: this.auc[this.aucId].price,
             better: this.user,
