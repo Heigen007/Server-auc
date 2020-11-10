@@ -2,7 +2,14 @@
 <div class = "reg">
     <div class="user but">User: {{user}}</div>
     <div class = "balance but">Balance: {{balance}}</div>
-    <div class="good but">Goods: {{good}}</div>
+    <div class="good but" v-for="(userr, key) in users" :key="key">
+      <div v-if="userr.name === user">
+        <div class="name">Goods:</div>
+        <div class = "goods" v-for="(good, key2) in userr.good" :key="key2">
+         {{good}}
+        </div>
+      </div>
+    </div>
 </div>
 
 </template>
@@ -42,6 +49,18 @@ export default {
     border-radius: 10px;
 }
 .reg{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.good.but{
+  margin-top: 0;
+}
+.name{
+  margin-top: 5vh;
+}
+.goods{
   display:flex;
   justify-content: center;
   align-items: center;
