@@ -57,7 +57,7 @@ export default {
           },
           body: JSON.stringify(user)
         })
-        this.$emit('clickBTN', user.name)
+        this.$emit('clickBTN', user.name, 2000)
         this.showmi = false
         this.showmiHei = false
       } else {

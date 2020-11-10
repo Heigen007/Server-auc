@@ -11,7 +11,7 @@
     <b>Вперед - к новым товарам!</b>
     </div>
     <div class = "button">
-      <router-link to="/auccion" class = "but">На аукцион!</router-link>
+      <router-link to="/auccions" class = "but">На аукцион!</router-link>
       <router-view></router-view>
       </div>
 </div>

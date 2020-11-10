@@ -10,6 +10,7 @@
     <div class="time but"><b>Время окончания: </b>{{auc[aucId].time.minut}}:{{auc[aucId].time.second}}</div>
     <div class="bet"><button class = "betbtn" @click="click">Поднять</button></div>
     <div class="but">Последнюю ставку сделал: {{auc[aucId].better}}</div>
+    <div class="is" v-if="Is">Недостаточный баланс!!!</div>
   </div>
 </div>
 
@@ -24,11 +25,16 @@ export default {
     aucId: Number,
     user: String,
     root: String,
-    money: Number
+    balance: Number
+  },
+  data: function () {
+    return {
+      Is: false
+    }
   },
   methods: {
     click () {
-      if (this.user != null) {
+      if (this.user != null && this.balance - this.auc[this.aucId].price - this.auc[this.aucId].step >= 0) {
         const Bet = {
           price: this.auc[this.aucId].price + this.auc[this.aucId].step,
           better: this.user,
@@ -41,6 +47,8 @@ export default {
           },
           body: JSON.stringify(Bet)
         })
+      } else {
+        this.Is = true
       }
     }
   },
@@ -48,18 +56,21 @@ export default {
     // whenever question changes, this function will run
     auc: function (newV, oldV) {
       if (this.auc[this.aucId].time.second === 1 && this.auc[this.aucId].time.minut === 0) {
-        const Buy = {
-          price: this.money - this.auc[this.aucId].price,
-          better: this.user,
-          title: this.auc[this.aucId].title
+        if (this.auc[this.aucId].better === this.user) {
+          const Buy = {
+            price: this.auc[this.aucId].price,
+            better: this.user,
+            title: this.auc[this.aucId].title
+          }
+          fetch(`${this.root}buy`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(Buy)
+          })
+          this.$emit('money', this.balance - this.auc[this.aucId].price)
         }
-        fetch(`${this.root}buy`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(Buy)
-        })
       }
     }
   }

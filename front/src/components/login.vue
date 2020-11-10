@@ -10,6 +10,7 @@
 </template>
 
 <script>
+var pr = null
 export default {
   name: 'HelloWorld',
   props: {
@@ -32,16 +33,15 @@ export default {
       if (dar.value) {
         this.users.forEach(element => {
           if (element.name === dar.value && element.pas === pas.value) {
-            console.log(1)
             this.UserCorrect = true
-            this.$emit('money', element.money)
+            pr = element.money
           }
         })
       }
       if (this.UserCorrect === false) {
         this.showmi = true
       } else if (dar.value && pas.value) {
-        this.$emit('clickBTN', dar.value)
+        this.$emit('clickBTN', dar.value, pr)
         dar.value = ''
         pas.value = ''
         this.showmi = false

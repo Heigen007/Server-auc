@@ -11,6 +11,7 @@
     <router-link to="/auccions" class = "but">Auccions</router-link>
     <router-link to="/newAuccion" class = "but" >NA</router-link>
     <div class="but bal">{{balance}}</div>
+    <router-link to="/user" class = "but but1" >User</router-link>
   </div>
 </div>
 
@@ -44,16 +45,19 @@ export default {
   float: left;
 }
 .buttons{
-  margin-left: 20vw;
+  margin-left: 15vw;
   display: flex;
   flex-direction: row;
 }
 .but{
-  font-size: 210%;
-  margin-left: 8vw;
+  font-size: 200%;
+  margin-left: 6vw;
   padding:6px;
   color: #ffe588;
   text-decoration: none;
+}
+.but1{
+color: #b30000;
 }
 .but:hover{
   background-color: #ad704d;
@@ -61,7 +65,6 @@ export default {
 }
 .bal{
   font-size: 210%;
-  margin-left: 8vw;
   padding:6px;
   color: #ff9691;
   text-decoration: none;
