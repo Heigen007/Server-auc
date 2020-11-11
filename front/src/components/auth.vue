@@ -1,8 +1,8 @@
 <template>
 <div class = "reg" v-on:keyup.enter="submit">
   <div class = "text">Регистрация</div>
-  <input type="text" id = 'log' autocomplete="off" placeholder="Логин:">
-  <input type="text" id = 'pas' autocomplete="off" placeholder="Пароль:">
+  <input type="text" id = 'log' autocomplete="off" placeholder="Логин:"><b>Минимум 4 символа</b>
+  <input type="text" id = 'pas' autocomplete="off" placeholder="Пароль:"><b>Минимум 4 символа</b>
   <div class = "c"><button class = "but"  @click="click">Зарегистрироваться</button></div>
   <div class="mistake" v-if="showmi">Введите логин и пароль!</div>
   <div class="mistake" v-if="showmiHei">Имя занято!</div>
@@ -42,7 +42,7 @@ export default {
       if (this.NameCorrect === false) {
         this.showmiHei = true
         this.showmi = false
-      } else if (dar.value && pas.value) {
+      } else if (dar.value && pas.value && dar.value.length > 3 && pas.value.length > 3) {
         const user = {
           name: dar.value,
           pas: pas.value
@@ -82,6 +82,9 @@ input{
     border-radius: 10px;
     color: #483916;
     outline: none;
+}
+b{
+  font-size: 2vh;
 }
 input:hover{
   border-color: #ff4c4c;

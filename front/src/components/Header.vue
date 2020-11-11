@@ -10,7 +10,7 @@
     <router-link to="/login" class = "but">Login</router-link>
     <router-link to="/auccions" class = "but">Auccions</router-link>
     <router-link to="/newAuccion" class = "but" >NA</router-link>
-    <div class="but bal">{{balance}}</div>
+    <router-link to="/game" class="but bal">{{balance}}</router-link>
     <router-link to="/user" class = "but but1" >User</router-link>
   </div>
 </div>
