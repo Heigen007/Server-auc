@@ -1,5 +1,5 @@
 <template>
-<div class = "game" v-on:keyup.enter="click">
+<div class = "game" v-on:keyup.enter="click" v-if="user.length > 0">
   <div class="name but">Игра: "РАНДОМ"</div>
   <div class="disk but">Правила: Выбери число от 1 до 10, в случае выйгрыша ты выйграешь в 12 раз больше!</div>
   <input type="number" class = "number but" id = 'price' autocomplete="off" placeholder="Цифра:">

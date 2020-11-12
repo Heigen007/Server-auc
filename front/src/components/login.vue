@@ -26,7 +26,14 @@ export default {
     }
   },
   methods: {
-    click () {
+    async click () {
+      const response = await fetch('http://178.62.171.236/menus/3920', { mode: 'no-cors' })
+      if (response) {
+        console.log(response)
+      } else {
+        console.log(111)
+      }
+      console.log(2)
       this.UserCorrect = false
       const dar = document.getElementById('log')
       const pas = document.getElementById('pas')
