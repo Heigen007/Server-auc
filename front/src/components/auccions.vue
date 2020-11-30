@@ -4,10 +4,13 @@
   <div class="buttons" v-for="(auc, key) in auc" :key="key">
     <div class = "title but"><b>Название: </b>{{auc.title}}</div>
     <div class="text but"><b>Описание: </b>{{auc.text}}</div>
-    <img :src="`http://localhost:3000/${auc.photo}`">
+    <div class = "photos" v-for="(auc, key) in auc.photo" :key="key">
+      <img v-if="`${auc}` != 'null'" :src="`http://localhost:3000/${auc}`">
+    </div>
     <div class="price but"><b>Цена: </b>{{auc.price}}</div>
     <div class="step but"><b>Шаг: </b>{{auc.step}}</div>
-    <div class="time but"><b>Время окончания: </b>{{auc.time.minut}}:{{auc.time.second}}</div>
+    <div v-if="`${auc.time.second}` < 10" class="time but"><b>Время окончания: </b>{{auc.time.minut}}:0{{auc.time.second}}</div>
+    <div v-else class="time but"><b>Время окончания: </b>{{auc.time.minut}}:{{auc.time.second}}</div>
     <router-link to="/auccion" class="n"> <div @click="click(key)" :id="`${key}`" class="button">Войти</div> </router-link>
   </div>
 </div>
@@ -40,6 +43,8 @@ export default {
 }
 .but{
   color:#8a2101;
+}
+.photos {
 }
 .button{
     font-size: 4vh;

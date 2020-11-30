@@ -5,7 +5,8 @@
   <textarea id = 'text' autocomplete="off" placeholder="Описание:" maxlength="200"></textarea>Не больше 200 символов
   <input type="number" class = "input" id = 'price' autocomplete="off" placeholder="Цена:">Не больше 1500
   <input type="number" class = "input" id = 'step' autocomplete="off" placeholder="Шаг:"> Не больше 500
-  <input type="file" class = "img" name="image" id = "image" @change="change" ref = "text" required multiple accept="image/*">1 файл :(
+  <input type="file" class = "img" name="image" id = "image" @change="change1" ref = "text1" required multiple accept="image/*">
+  <input type="file" class = "img" name="image" id = "image2" @change="change2" ref = "text2" required multiple accept="image/*">
   <input type="number" class = "input" id = 'time' autocomplete="off" placeholder="Время в минутах(не больше часа):">Не больше 60 минут
   <div class = "c"><button class = "but" @click="click">Создать</button></div>
   <div class="mistake" v-if="showmi">Введите верные данные!</div>
@@ -27,14 +28,21 @@ export default {
       er: false,
       showmiHei: false,
       NameCorrect: true,
-      image: null
+      image: null,
+      image2: null
     }
   },
   methods: {
-    change () {
-      if (this.$refs.text.files.length === null) this.image = null
+    change1 () {
+      if (this.$refs.text1.files.length === null) this.image = null
       else {
-        this.image = this.$refs.text.files[0]
+        this.image = this.$refs.text1.files[0]
+      }
+    },
+    change2 () {
+      if (this.$refs.text2.files.length === null) this.image2 = null
+      else {
+        this.image2 = this.$refs.text2.files[0]
       }
     },
     click () {
@@ -45,15 +53,18 @@ export default {
       const step = document.getElementById('step')
       const time = document.getElementById('time')
       const photo = document.getElementById('image')
+      const photo2 = document.getElementById('image2')
       const fileType = photo.value.split('\\')
-      if (title.value && text.value && price.value && step.value && time.value && photo.value && time.value < 61 && step.value <= 500 && price.value <= 1500 && step.value > 0 && price.value > 0 && time.value > 0) {
+      const fileType2 = photo2.value.split('\\')
+      console.log(photo.value)
+      if (title.value && text.value && price.value && step.value && time.value && (photo.value || photo2.value) && time.value < 61 && step.value <= 500 && price.value <= 1500 && step.value > 0 && price.value > 0 && time.value > 0) {
         const NA = {
           title: title.value,
           text: text.value,
           price: price.value,
           step: step.value,
           time: time.value,
-          photo: fileType[2],
+          photo: [fileType[2], fileType2[2]],
           better: 'nobody bet'
         }
         title.value = ''
@@ -72,6 +83,15 @@ export default {
           const formData = new FormData()
           formData.append('image', this.image)
           axios.post('http://localhost:3000/files', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+        }
+        if (this.image2) {
+          const formData2 = new FormData()
+          formData2.append('image', this.image2)
+          axios.post('http://localhost:3000/files', formData2, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }

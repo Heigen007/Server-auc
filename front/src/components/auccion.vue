@@ -4,10 +4,13 @@
   <div class="buttons" v-if="auc[aucId].time.minut >= 0 && auc[aucId].time.second > 0">
     <div class = "title but"><b>Название: </b>{{auc[aucId].title}}</div>
     <div class="text but"><b>Описание: </b>{{auc[aucId].text}}</div>
-    <img :src="`http://localhost:3000/${auc[aucId].photo}`">
+    <div class = "photos" v-for="(auc, key) in auc[aucId].photo" :key="key">
+      <img v-if="`${auc}` != 'null'" :src="`http://localhost:3000/${auc}`">
+    </div>
     <div class="price but"><b>Цена: </b>{{auc[aucId].price}}</div>
     <div class="step but"><b>Шаг: </b>{{auc[aucId].step}}</div>
-    <div class="time but"><b>Время окончания: </b>{{auc[aucId].time.minut}}:{{auc[aucId].time.second}}</div>
+    <div v-if="`${auc[aucId].time.second}` < 10" class="time but"><b>Время окончания: </b>{{auc[aucId].time.minut}}:0{{auc[aucId].time.second}}</div>
+    <div v-else class="time but"><b>Время окончания: </b>{{auc[aucId].time.minut}}:{{auc[aucId].time.second}}</div>
     <div class="bet"><button class = "betbtn" @click="click">Поднять</button></div>
     <div class="but">Последнюю ставку сделал: {{auc[aucId].better}}</div>
     <div class="is" v-if="Is">Недостаточный баланс!!!</div>

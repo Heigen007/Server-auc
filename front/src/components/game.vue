@@ -33,8 +33,9 @@ export default {
       this.message = ''
       var k
       const value = document.getElementById('price').value
+      var money = document.getElementById('money').value
       var check = 0
-      if (value && value > 0 && value < 10) {
+      if (value && value > 0 && value < 10 && money < this.balance) {
         this.IsNot = false
         this.Is = true
         k = setInterval(() => {
