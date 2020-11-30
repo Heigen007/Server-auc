@@ -7,7 +7,8 @@ import auccions from '../components/auccions.vue'
 import auccion from '../components/auccion.vue'
 import Hello from '../components/hello.vue'
 import newAuccion from '../components/newAuccion.vue'
-
+import user from '../components/user.vue'
+import game from '../components/game.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -45,6 +46,16 @@ const routes = [
     path: '/auccion',
     name: 'auccion',
     component: auccion
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: user
+  },
+  {
+    path: '/game',
+    name: 'game',
+    component: game
   }
 ]
 

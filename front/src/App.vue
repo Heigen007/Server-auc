@@ -2,7 +2,7 @@
   <div class="home">
     <Header :user="user" :balance="balance"/>
     <div class = "a"></div>
-    <router-view :aucId="aucId" :auc="auc" :user="user" :root="root" :users="UsersList" @clickBTN="auth" @auccion="myauc" @money="money"></router-view>
+    <router-view :balance="balance" :aucId="aucId" :auc="auc" :user="user" :root="root" :users="UsersList" @clickBTN="auth" @auccion="myauc" @money="money"></router-view>
   </div>
 </template>
 
@@ -28,15 +28,16 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    auth (a) {
+    auth (a, b) {
       this.user = a
-      this.balance = 2000
+      this.balance = b
     },
     myauc (id) {
       this.aucId = id
     },
     money (a) {
       this.balance = a
+      console.log(this.balance)
     }
   },
   async beforeMount () {

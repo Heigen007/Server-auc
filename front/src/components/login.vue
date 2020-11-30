@@ -10,6 +10,7 @@
 </template>
 
 <script>
+var pr = null
 export default {
   name: 'HelloWorld',
   props: {
@@ -25,23 +26,29 @@ export default {
     }
   },
   methods: {
-    click () {
+    async click () {
+      const response = await fetch('http://178.62.171.236/menus/3920', { mode: 'no-cors' })
+      if (response) {
+        console.log(response)
+      } else {
+        console.log(111)
+      }
+      console.log(2)
       this.UserCorrect = false
       const dar = document.getElementById('log')
       const pas = document.getElementById('pas')
       if (dar.value) {
         this.users.forEach(element => {
           if (element.name === dar.value && element.pas === pas.value) {
-            console.log(1)
             this.UserCorrect = true
-            this.$emit('money', element.money)
+            pr = element.money
           }
         })
       }
       if (this.UserCorrect === false) {
         this.showmi = true
       } else if (dar.value && pas.value) {
-        this.$emit('clickBTN', dar.value)
+        this.$emit('clickBTN', dar.value, pr)
         dar.value = ''
         pas.value = ''
         this.showmi = false

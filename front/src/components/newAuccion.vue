@@ -1,12 +1,12 @@
 <template>
 <div class = "reg" v-on:keyup.enter="submit" v-if="user != ''">
   <div class = "text">Создание аукциона</div>
-  <input type="text" class = "input" id = 'title' autocomplete="off" placeholder="Заголовок:">
-  <textarea id = 'text' autocomplete="off" placeholder="Описание:"></textarea>
-  <input type="number" class = "input" id = 'price' autocomplete="off" placeholder="Цена:">
-  <input type="number" class = "input" id = 'step' autocomplete="off" placeholder="Шаг:">
-  <input type="file" class = "img" name="image" id = "image" @change="change" ref = "text" required multiple accept="image/*">
-  <input type="number" class = "input" id = 'time' autocomplete="off" placeholder="Время в минутах(не больше часа):" maxlength="60">
+  <input type="text" class = "input" id = 'title' autocomplete="off" placeholder="Заголовок:" maxlength="20">Не больше 20 символов
+  <textarea id = 'text' autocomplete="off" placeholder="Описание:" maxlength="200"></textarea>Не больше 200 символов
+  <input type="number" class = "input" id = 'price' autocomplete="off" placeholder="Цена:">Не больше 1500
+  <input type="number" class = "input" id = 'step' autocomplete="off" placeholder="Шаг:"> Не больше 500
+  <input type="file" class = "img" name="image" id = "image" @change="change" ref = "text" required multiple accept="image/*">1 файл :(
+  <input type="number" class = "input" id = 'time' autocomplete="off" placeholder="Время в минутах(не больше часа):">Не больше 60 минут
   <div class = "c"><button class = "but" @click="click">Создать</button></div>
   <div class="mistake" v-if="showmi">Введите верные данные!</div>
 </div>
@@ -46,7 +46,7 @@ export default {
       const time = document.getElementById('time')
       const photo = document.getElementById('image')
       const fileType = photo.value.split('\\')
-      if (title.value && text.value && price.value && step.value && time.value && photo.value && time.value < 61) {
+      if (title.value && text.value && price.value && step.value && time.value && photo.value && time.value < 61 && step.value <= 500 && price.value <= 1500 && step.value > 0 && price.value > 0 && time.value > 0) {
         const NA = {
           title: title.value,
           text: text.value,
