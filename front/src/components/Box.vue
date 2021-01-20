@@ -46,7 +46,7 @@ export default {
       box.style.transform = 
     'translateY(' + 0 + 'px)';
       },800);
-      this.$emit('str', 1)
+
     } else {
 
       document.querySelectorAll('.side')
@@ -60,7 +60,7 @@ export default {
       setTimeout(() => {
       box.style.transform = 'translateX(' + 0 + 'px)';
       },800);
-      this.$emit('str', 0)
+
     }
     }
   },
@@ -102,7 +102,8 @@ button{
   font-size: 10px;
 }
 .container {
- margin: 100px auto;
+ position: relative;
+ margin: 200px auto;
  width: 300px;
  height: 300px;
  perspective: 700px;
