@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
-    <div id="location">LatLng(54.98, 82.89)</div>
-    <div id="map" style="width:100vw; min-height: calc(100vh - 50px)"></div>
+    <div id="location">Your position:</div>
+    <div id="map" style="width:100vw; min-height: 105vh"></div>
   </q-page>
 </template>
 
@@ -15,20 +15,22 @@ export default {
     map = DG.map('map', {
       center: [54.98, 82.89],
       zoom: 13,
-      draggable: true
+      draggable: true,
+      zoomControl: false,
+      fullscreenControl: false
     })
     map.locate({ setView: true, watch: true })
       .on('locationfound', function (e) {
         if (!marker) {
           console.log(1)
-          // var myIcon = DG.icon({
-          //   iconUrl: './unnamed.png',
-          //   iconSize: [38, 95]
-          // })
+          var myIcon = DG.icon({
+            iconUrl: 'https://cdn.icon-icons.com/icons2/317/PNG/512/map-marker-icon_34392.png',
+            iconSize: [45, 45]
+          })
 
           marker = DG.marker([e.latitude, e.longitude], {
-            draggable: false
-            // icon: myIcon
+            draggable: false,
+            icon: myIcon
           }).addTo(map)
 
           map.on('move', function (e) {
