@@ -18,10 +18,19 @@
     >
       <q-list>
         <q-item-label
+          v-if="isLoggedIn"
           header
           class="text-grey-8"
+          style="display: flex; align-items: center; flex-direction: column"
         >
-          Essential Links
+          <q-img
+          src="../assets/a.jpg"
+          spinner-color="white"
+          style="height: 140px; width: 140px; border-radius: 50%"
+          />
+
+          <span class = "userName">{{userName}}</span>
+
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
@@ -39,18 +48,19 @@
 
 <script>
 import EssentialLink from 'components/EssentialLink.vue'
+import { mapGetters } from 'vuex'
 const linksData = [
-  {
-    title: 'Home',
-    caption: 'return home',
-    icon: 'home',
-    link: '/#/'
-  },
   {
     title: '2GIS',
     caption: '2gis maps',
     icon: 'public',
-    link: '/#/map'
+    link: '/#/'
+  },
+  {
+    title: 'Settings',
+    caption: 'Settings',
+    icon: 'settings',
+    link: '/#/settings'
   }
 ]
 
@@ -62,6 +72,18 @@ export default {
       leftDrawerOpen: false,
       essentialLinks: linksData
     }
+  },
+  computed: {
+    ...mapGetters(['isLoggedIn']),
+    userName () {
+      return this.$store.state.name
+    }
   }
 }
 </script>
+
+<style scoped>
+.userName{
+  margin: 1vw;
+}
+</style>

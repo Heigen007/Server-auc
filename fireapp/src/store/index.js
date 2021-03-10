@@ -8,7 +8,11 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     state: {
-      name: 'as'
+      token: 'User',
+      name: 'UserName'
+    },
+    getters: {
+      isLoggedIn: state => !!state.token
     },
     strict: process.env.DEBUGGING
   })

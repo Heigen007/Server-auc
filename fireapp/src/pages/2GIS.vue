@@ -1,17 +1,25 @@
 <template>
   <q-page class="flex flex-center">
     <div id="location">Your position:</div>
-    <div id="map" style="width:100vw; min-height: 105vh"></div>
+    <div id = "Ob">
+    <div id="map" style="width:100vw; height: 105vh"></div></div>
   </q-page>
 </template>
 
 <script>
 export default {
   name: 'PageIndex',
+  updated () {
+    location.reload()
+  },
   mounted () {
+    console.log(1)
+    document.getElementById('map').remove()
+
     var map, marker
     var locationInfo = document.getElementById('location')
     var DG = require('2gis-maps')
+    console.log(document.getElementById('map'))
     map = DG.map('map', {
       center: [54.98, 82.89],
       zoom: 13,
@@ -23,14 +31,13 @@ export default {
       .on('locationfound', function (e) {
         if (!marker) {
           console.log(1)
-          var myIcon = DG.icon({
-            iconUrl: 'https://cdn.icon-icons.com/icons2/317/PNG/512/map-marker-icon_34392.png',
-            iconSize: [45, 45]
-          })
+          // var myIcon = DG.icon({
+          //   iconUrl: 'https://cdn.icon-icons.com/icons2/317/PNG/512/map-marker-icon_34392.png',
+          //   iconSize: [45, 45]
+          // })
 
           marker = DG.marker([e.latitude, e.longitude], {
-            draggable: false,
-            icon: myIcon
+            draggable: false
           }).addTo(map)
 
           map.on('move', function (e) {
