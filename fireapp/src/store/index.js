@@ -9,7 +9,13 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     state: {
       token: 'User',
-      name: 'UserName'
+      name: 'UserName',
+      updated: false
+    },
+    mutations: {
+      st_ch(state, status) {
+        state.updated = status
+      }
     },
     getters: {
       isLoggedIn: state => !!state.token

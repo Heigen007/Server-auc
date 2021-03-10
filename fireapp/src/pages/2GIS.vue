@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div id="location">Your position:</div>
-    <div id = "Ob">
+    <div id = "Ob" style="width:100vw; height: 105vh">
     <div id="map" style="width:100vw; height: 105vh"></div></div>
   </q-page>
 </template>
@@ -12,10 +12,16 @@ export default {
   updated () {
     location.reload()
   },
+  created(){
+    if (this.Status == 'true') {
+      this.$store.commit('st_ch', 'false')
+      location.reload()
+    } else {
+      this.$store.commit('st_ch', 'true')
+    }
+  },
   mounted () {
     console.log(1)
-    document.getElementById('map').remove()
-
     var map, marker
     var locationInfo = document.getElementById('location')
     var DG = require('2gis-maps')
@@ -58,6 +64,11 @@ export default {
           .setContent('Доступ к определению местоположения отключён')
           .openOn(map)
       })
+  },
+  computed: {
+    Status () {
+      return this.$store.state.updated
+    }
   }
 }
 </script>
