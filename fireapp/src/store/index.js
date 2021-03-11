@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     state: {
-      token: 'User',
+      // token: 'User',
       name: 'UserName',
       updated: false
     },
