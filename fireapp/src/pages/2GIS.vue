@@ -8,19 +8,19 @@
 
 <script>
 export default {
-  name: 'PageIndex',
+  name: 'TwoGis',
   updated () {
     location.reload()
   },
   created(){
+  },
+  mounted () {
     if (this.Status == 'true') {
       this.$store.commit('st_ch', 'false')
-      location.reload()
+      this.$forceUpdate();
     } else {
       this.$store.commit('st_ch', 'true')
     }
-  },
-  mounted () {
     console.log(1)
     var map, marker
     var locationInfo = document.getElementById('location')

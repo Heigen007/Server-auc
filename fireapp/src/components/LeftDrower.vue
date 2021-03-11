@@ -33,6 +33,11 @@
 
         </q-item-label>
         <EssentialLink
+          v-else
+          :key="LoginData.title"
+          v-bind="LoginData"
+        />
+        <EssentialLink
           v-for="link in essentialLinks"
           :key="link.title"
           v-bind="link"
@@ -63,6 +68,12 @@ const linksData = [
     link: '/#/settings'
   }
 ]
+const LoginData = {
+    title: 'Login',
+    caption: 'login',
+    icon: 'public',
+    link: '/#/login'
+}
 
 export default {
   name: 'LeftDrower',
@@ -70,7 +81,8 @@ export default {
   data () {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData
+      essentialLinks: linksData,
+      LoginData
     }
   },
   computed: {

@@ -7,7 +7,7 @@
 <script>
 import LeftDrower from 'components/LeftDrower.vue'
 export default {
-  name: 'PageIndex',
+  name: 'MapLayout',
   components: { LeftDrower },
   mounted () {
   }

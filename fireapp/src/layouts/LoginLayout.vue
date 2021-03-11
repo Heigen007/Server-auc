@@ -6,7 +6,7 @@
 import LeftDrower from 'components/LeftDrower.vue'
 
 export default {
-  name: 'SettingLayout',
+  name: 'LoginLayout',
   components: { LeftDrower },
   mounted () {
   }

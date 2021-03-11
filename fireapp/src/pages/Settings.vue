@@ -1,7 +1,5 @@
 <template>
-  <q-page
-    style="display: flex; align-items: center; flex-direction: column"
-  >
+  <q-page style="display: flex; align-items: center; flex-direction: column">
     <q-icon
     name="settings"
     style="font-size: 9em;"
@@ -39,6 +37,6 @@
 
 <script>
 export default {
-  name: 'PageIndex'
+  name: 'Settings'
 }
 </script>
