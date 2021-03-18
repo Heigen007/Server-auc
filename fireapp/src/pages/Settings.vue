@@ -22,14 +22,6 @@
           <q-item-section>Your Adress</q-item-section>
           <q-item-section side>Изменить</q-item-section>
         </q-item>
-
-        <q-item clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon name="signal_wifi_off" />
-          </q-item-section>
-          <q-item-section>Active, Active class</q-item-section>
-          <q-item-section side>Изменить</q-item-section>
-        </q-item>
       </q-list>
     </div>
   </q-page>
