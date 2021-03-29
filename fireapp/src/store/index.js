@@ -5,23 +5,30 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default function (/* { ssrContext } */) {
-  const Store = new Vuex.Store({
+export default new Vuex.Store({
     state: {
-      // token: 'User',
-      name: 'UserName',
+      token: localStorage.getItem('token') || '',
+      phone: '+77777777777',
       updated: false
     },
     mutations: {
       st_ch(state, status) {
         state.updated = status
+      },
+      cr_token(state, token) {
+        state.token = token
+        localStorage.setItem('token', token)
       }
+    },
+    actions: {
+      logout(){
+        localStorage.removeItem('token')
+        this.state.token = ''
+      },
     },
     getters: {
       isLoggedIn: state => !!state.token
     },
     strict: process.env.DEBUGGING
-  })
 
-  return Store
-}
+})

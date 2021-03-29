@@ -1,30 +1,25 @@
-
 const routes = [
   {
     path: '/',
     component: () => import('layouts/MapLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/2GIS.vue') }
+      { path: '', name: 'main', component: () => import('pages/2GIS.vue') }
     ]
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: '/settings',
     component: () => import('layouts/SettingLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Settings.vue') }
+      { path: '', name: 'settings', component: () => import('pages/Settings.vue') }
     ]
   },
   {
     path: '/login',
-    component: () => import('layouts/LoginLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/Login.vue') }
-    ]
+    name: 'login',
+    component: () => import('pages/Login.vue')
   },
   {
+    name: 'error',
     path: '/error',
     component: () => import('pages/Error404.vue')
   }

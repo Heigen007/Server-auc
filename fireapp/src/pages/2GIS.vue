@@ -13,6 +13,7 @@ export default {
     location.reload()
   },
   created(){
+    console.log(this.Status);
   },
   mounted () {
     if (this.Status == 'true') {
@@ -72,3 +73,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#location{
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
