@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
       token: localStorage.getItem('token') || '',
-      phone: '+77777777777',
+      phone: localStorage.getItem('phone') || '',
       updated: false
     },
     mutations: {
@@ -18,6 +18,16 @@ export default new Vuex.Store({
       cr_token(state, token) {
         state.token = token
         localStorage.setItem('token', token)
+      },
+      cr_phone(state, phone) {
+        state.phone = phone
+        localStorage.setItem('phone', phone)
+      },
+      logout(state){
+        this.phone = ''
+        this.token = ''
+        localStorage.removeItem('phone')
+        localStorage.removeItem('token')
       }
     },
     actions: {

@@ -23,25 +23,16 @@
           class="text-grey-8"
           style="display: flex; align-items: center; flex-direction: column"
         >
-          <q-img
-          src="../assets/a.jpg"
-          spinner-color="white"
-          style="height: 140px; width: 140px; border-radius: 50%"
-          />
 
-          <span class = "userName">{{userName}}</span>
+          <span class = "userName">{{userPhoneNumber}}</span>
 
         </q-item-label>
-        <EssentialLink
-          v-else
-          :key="LoginData.title"
-          v-bind="LoginData"
-        />
         <EssentialLink
           v-for="link in essentialLinks"
           :key="link.title"
           v-bind="link"
         />
+        <div class="button" @click="ExitAction">Выйти</div>
       </q-list>
     </q-drawer>
 
@@ -68,12 +59,6 @@ const linksData = [
     link: '/#/settings'
   }
 ]
-const LoginData = {
-    title: 'Login',
-    caption: 'login',
-    icon: 'public',
-    link: '/#/login'
-}
 
 export default {
   name: 'LeftDrower',
@@ -81,14 +66,31 @@ export default {
   data () {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData,
-      LoginData
+      essentialLinks: linksData
+    }
+  },
+  mounted(){
+    let button = document.querySelector('.button')
+    button.addEventListener('touchstart', function(){
+      button.style.background = "rgb(245,245,245)"
+    })
+    button.addEventListener('touchend', function(){
+      button.style.background = "#fff"
+    })
+  },
+  methods:{
+    ExitAction(){
+      this.$store.commit('logout')
+      location.reload()
     }
   },
   computed: {
     ...mapGetters(['isLoggedIn']),
     userName () {
       return this.$store.state.name
+    },
+    userPhoneNumber(){
+      return this.$store.state.phone
     }
   }
 }
@@ -97,5 +99,19 @@ export default {
 <style scoped>
 .userName{
   margin: 1vw;
+  font-size: 1.4em;
+}
+.button{
+  width: 70%;
+  margin: 20px auto;
+  padding: 1.7vh 0 1.7vh 0;
+  background: #fff;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: 800;
+  color:rgb(65, 62, 62);
+  border: none;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 </style>

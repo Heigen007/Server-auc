@@ -2,147 +2,76 @@
 <q-layout view="lHh Lpr lFf">
   <q-page-container>
     <q-page style="display: flex; align-items: center; flex-direction: column">
-      <q-card>
-        <q-tabs
-          v-model="tab"
-          dense
-          class="text-grey"
-          active-color="primary"
-          indicator-color="primary"
-          align="justify"
-          narrow-indicator
-        >
-          <q-tab name="mails" label="Sign In" />
-          <q-tab name="alarms" label="Sign Up" />
-        </q-tabs>
-
-        <q-separator />
-
-        <q-tab-panels v-model="tab" animated>
-          <q-tab-panel name="mails">
-            <div class="q-pa-md" style="width: 100vw">
-              <q-form
-              @submit="onSignIn"
-              @reset="onReset"
-              class="q-gutter-md"
-              >
-                <q-input
-                  filled
-                  v-model="name"
-                  label="Your login *"
-                  lazy-rules
-                  :rules="[ val => val && val.length > 0 || 'Please type your name']"
-                />
-
-                <q-input
-                  filled
-                  v-model="password"
-                  label="Your password *"
-                  lazy-rules
-                  :rules="[ val => val && val.length > 5 || 'Your password should be longer than 5 symbols']"
-                />
-
-                <div>
-                  <q-btn label="Submit" type="submit" color="primary"/>
-                  <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
-                </div>
-              </q-form>
-            </div>
-          </q-tab-panel>
-
-          <q-tab-panel name="alarms">
-            <div class="q-pa-md" style="width: 100vw">
-              <q-form
-              @submit="onSignUp"
-              @reset="onReset"
-              class="q-gutter-md"
-              >
-                <q-input
-                  filled
-                  v-model="name"
-                  label="Your login *"
-                  lazy-rules
-                  :rules="[ val => val && val.length > 0 || 'Please type your name']"
-                />
-
-                <q-input
-                  filled
-                  v-model="password"
-                  label="Your password *"
-                  lazy-rules
-                  :rules="[ val => val && val.length > 0 || 'Your password should be longer than 5 symbols']"
-                />
-
-                <q-input
-                  filled
-                  v-model="phoneNumber"
-                  label="Your phone number *"
-                  lazy-rules
-                  :rules="[ val => val && val.length > 8 && val.length < 13 || 'Your password should be longer than 8 symbols and shorter than 15 symbols']"
-                />
-
-                <q-toggle v-model="accept" label="I accept the license and terms" />
-
-                <div>
-                  <q-btn label="Submit" type="submit" color="primary"/>
-                  <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
-                </div>
-              </q-form>
-            </div>
-          </q-tab-panel>
-        </q-tab-panels>
-      </q-card>
-    </q-page>
+      <transition :name="slideType" mode="out-in">
+        <PageOne v-if="stage == 1" @goPrev = "previousPage" @ahead = "PhaseAhead" />
+        <PageTwo v-if="stage == 2" @goPrev = "previousPage" @ahead = "PhaseGetNumber" />
+        <PageThree v-if="stage == 3" @goPrev = "previousPage" @ahead = "PhaseRedirectToMainPage" />
+      </transition>
+  </q-page>
   </q-page-container>
   </q-layout>
 </template>
 
 <script>
+import PageOne from '../components/LoginPage1'
+import PageTwo from '../components/LoginPage2'
+import PageThree from '../components/LoginPage3'
 export default {
   name: 'Login',
   data () {
     return {
-      name: null,
-      password: null,
-      phoneNumber: false,
-      accept: false,
-      tab: 'mails'
+      stage: 1,
+      phone: null,
+      slideType: 'slide-left'
     }
   },
-
   methods: {
-    onSignUp () {
-      if (this.accept !== true) {
-        this.$q.notify({
-          color: 'red-5',
-          textColor: 'white',
-          icon: 'warning',
-          message: 'You need to accept the license and terms first'
-        })
-      }
-      else {
-        this.$q.notify({
-          color: 'green-4',
-          textColor: 'white',
-          icon: 'cloud_done',
-          message: 'Success'
-        })
-      }
+    changeSlideType(type){
+      this.slideType = type
     },
-    onSignIn () {
-      this.$q.notify({
-        color: 'green-4',
-        textColor: 'white',
-        icon: 'cloud_done',
-        message: 'Success'
-      })
+    previousPage(){
+      this.stage -= 1
+      this.changeSlideType('slide-right')
     },
-
-    onReset () {
-      this.name = null
-      this.age = null
-      this.accept = false
+    PhaseAhead(){
+      this.stage += 1
+      this.changeSlideType('slide-left')
+    },
+    PhaseGetNumber(phone){
+      this.phone = phone
+      this.stage += 1
+      this.changeSlideType('slide-left')
+    },
+    PhaseRedirectToMainPage(){
+      this.$store.commit('cr_phone', this.phone.replace(/\s/g, ''))
+      this.$router.push('/#/')
     }
+  },
+  components:{
+    PageOne,
+    PageTwo,
+    PageThree
   }
 }
 </script>
+<style scoped>
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active
+ {
+  transition: 0.2s;
+}
+.slide-left-enter{
+  transform: translateX(100vw);
+}
+.slide-left-leave-to{
+  transform: translateX(-100vw);
+}
+.slide-right-enter{
+  transform: translateX(-100vw);
+}
+.slide-right-leave-to{
+  transform: translateX(100vw);
+}
+</style>
