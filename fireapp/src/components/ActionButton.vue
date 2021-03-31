@@ -97,7 +97,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.svg:hover{
+  margin-top: -20px;
+  transition: .5s;
+  filter: url("#f");
+}
 .q-icon{
   margin-left: 20px;
   border-radius: 50%;
