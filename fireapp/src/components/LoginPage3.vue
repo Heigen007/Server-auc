@@ -31,7 +31,7 @@
           </template>
         </q-input>
           <div class="buttonParent">
-            <button type="submit">Вход</button>
+            <button type="submit">Подтвердить</button>
           </div>
         </q-form>
       </div>

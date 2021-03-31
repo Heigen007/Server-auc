@@ -4,9 +4,9 @@
       clickable
       tag="a"
       >
-      <q-item-section avatar>
-        <q-icon @click="$emit('goPrev')" name="add" style = "font-size: 30px; transform:rotate(45deg)" />
-      </q-item-section>
+    <q-item-section avatar>
+      <q-icon @click="$emit('goPrev')" name="add" style = "font-size: 30px; transform:rotate(45deg)" />
+    </q-item-section>
 
     </q-item>
     <q-card>
@@ -31,7 +31,7 @@
           </template>
         </q-input>
           <div class="buttonParent">
-            <button type="submit">Подтвердить</button>
+            <button type="submit">Вход</button>
           </div>
         </q-form>
       </div>

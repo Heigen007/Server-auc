@@ -2,8 +2,8 @@
 
   <q-page class='flex flex-center'>
     <div id='location'>Your position:</div>
-    <div id = 'Ob' style='width:100vw; height: 100vh'>
-    <div id='map' style='width:100vw; height: 100vh'></div></div>
+    <div id = 'Ob' style='width:100vw; height: 95vh'>
+    <div id='map' style='width:100vw; height: 95vh'></div></div>
     <div class="page-reload" @click="reload">Обновить карту</div>
     <ActionButton />
   </q-page>
