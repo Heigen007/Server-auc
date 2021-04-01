@@ -1,5 +1,5 @@
 <template>
-  <div id="main" class="main">
+  <div id="main" v-if="IsTurned" class="main">
     <div class = 'actionButton' @click = "actionButtonPressed">Вызвать Пожарных</div>
     <div v-touch-swipe="swipeAction" class="contentBlock" id = "contentBlock" v-if="stage>1">
       <h6 class="title">Укажите адрес</h6>
@@ -30,7 +30,7 @@
       <div class = "currentPos">
           <h6 style = "color: red; text-align: center; font-size: 1.4em; line-height:1em">Заведомо ложный вызов влечет за собой штраф в размере тридцати месячных расчетных показателей.</h6>
       </div>
-      <div class="buttonNext">Вызвать(10сек)</div>
+      <div class="buttonNext" @click="fireCall">Вызвать(10сек)</div>
     </div>
   </div>
 </template>
@@ -39,6 +39,9 @@
 
 export default {
   name: 'LeftDrower',
+  props:{
+    IsTurned: Boolean
+  },
   data () {
     return {
       stage: 1,
@@ -92,17 +95,19 @@ export default {
         this.next = true;
         document.getElementById('main').style.height = '40vh'
       }, 550);
+    },
+    fireCall(){
+      setTimeout(() => {
+        this.next = false     
+      }, 550);
+      document.getElementById('main').style.height = '0' 
+      document.getElementById('icon').style.opacity = '0'
     }
   }
 }
 </script>
 
-<style>
-.svg:hover{
-  margin-top: -20px;
-  transition: .5s;
-  filter: url("#f");
-}
+<style scoped>
 .q-icon{
   margin-left: 20px;
   border-radius: 50%;

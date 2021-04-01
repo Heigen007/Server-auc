@@ -5,7 +5,7 @@
     <div id = 'Ob' style='width:100vw; height: 95vh'>
     <div id='map' style='width:100vw; height: 95vh'></div></div>
     <div class="page-reload" @click="reload">Обновить карту</div>
-    <ActionButton />
+    <ActionButton :IsTurned="true" />
   </q-page>
 </template>
 
@@ -34,7 +34,7 @@ export default {
       .on('locationfound', function (e) {
         let myDivIcon = DG.divIcon({
                     iconSize: [35, 1],
-                    html: "<svg class = 'svg' width='35' height='50' viewBox='0 0 29 47' fill='none' xmlns='http://www.w3.org/2000/svg'><g filter='url(#filter0_f)'><ellipse cx='15' cy='43' rx='8' ry='2' fill='black' fill-opacity='0.1'/></g><line x1='15' y1='28' x2='15' y2='42' stroke='#FF2600' stroke-width='2' stroke-linecap='round'/><circle cx='14.5' cy='14.5' r='14.5' fill='#FF583B'/><circle cx='14.5' cy='14.5' r='6.5' fill='#FFCC81'/><defs><filter id='filter0_f' x='5' y='39' width='20' height='8' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'><feFlood flood-opacity='0' result='BackgroundImageFix'/><feBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/><feGaussianBlur stdDeviation='1' result='effect1_foregroundBlur'/></filter></defs></svg>"
+                    html: "<svg class = 'svg' width='35' height='90' viewBox='0 0 29 47' fill='none' xmlns='http://www.w3.org/2000/svg'><ellipse cx='15' cy='43' rx='8' ry='2' fill='black' fill-opacity='0.1'/><line x1='15' y1='28' x2='15' y2='42' stroke='#FF2600' stroke-width='2' stroke-linecap='round'/><circle cx='14.5' cy='14.5' r='14.5' fill='#FF583B'/><circle cx='14.5' cy='14.5' r='6.5' fill='#FFCC81'/><defs><filter id='filter0_f' x='5' y='39' width='20' height='8' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'><feFlood flood-opacity='0' result='BackgroundImageFix'/><feBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/><feGaussianBlur stdDeviation='1' result='effect1_foregroundBlur'/></filter></defs></svg>"
                 });
         if (!marker) {
           marker = DG.marker([e.latitude, e.longitude], {
@@ -45,6 +45,16 @@ export default {
           map.on('move', function (e) {
             marker.setLatLng([map.getCenter().lat, map.getCenter().lng])
             locationInfo.innerHTML = marker._latlng.lat + ', ' + marker._latlng.lng
+          })
+          map.on('movestart', function(){
+            document.querySelector('svg').style.marginTop = '-20px'
+            document.querySelector('ellipse').style.cy = '60'
+            document.querySelector('ellipse').style.rx = '12'
+          })
+          map.on('moveend', function(){
+            document.querySelector('svg').style.marginTop = '0'
+            document.querySelector('ellipse').style.cy = '43'
+            document.querySelector('ellipse').style.rx = '8'
           })
         }
       })
@@ -89,6 +99,9 @@ export default {
 </script>
 
 <style>
+/* #map{
+  filter: invert(100%)
+} */
 #location{
   height: 5vh;
   display: flex;
@@ -100,6 +113,14 @@ export default {
 }
 .svg{
   visibility: visible;
+  transition: 0.5s;
+}
+ellipse{
+  transition: 0.5s;
+}
+g{
+    position: absolute;
+  z-index: 1000;
 }
 .page-reload{
   position: absolute;
