@@ -16,9 +16,15 @@ export default {
   updated () {
     location.reload()
   },
+  watch:{
+    Theme: function(oldV, NewV){
+      document.getElementById('map').style.filter = `invert(${oldV == 'black' ? '100%' : '0%'})`
+    }
+  },
   mounted () {
     this.activateButton()
     this.forceUpdate()
+    this.checkTheme()
     var map, marker
     var locationInfo = document.getElementById('location')
     var DG = require('2gis-maps')
@@ -85,6 +91,9 @@ export default {
     },
     reload(){
       window.location.reload()
+    },
+    checkTheme(){
+      document.getElementById('map').style.filter = `invert(${this.Theme == 'black' ? '100%' : '0%'})`
     }
   },
   components:{
@@ -93,6 +102,9 @@ export default {
   computed: {
     Status () {
       return this.$store.state.updated
+    },
+    Theme(){
+      return this.$store.state.theme
     }
   }
 }
@@ -107,6 +119,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.5s;
 }
 .leaflet-marker-icon{
   visibility: hidden;

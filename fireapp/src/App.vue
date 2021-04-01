@@ -18,6 +18,17 @@ export default {
       const toDepth = to.path.split('/')[1]
       const fromDepth = from.path.split('/')[1]
       this.transitionName = toDepth == '' ? 'opacity' : 'slide-left'
+    },
+    theme: function(oldV, newV){
+      this.$q.dark.set(newV == 'black' ? false : true)
+    }
+  },
+  beforeMount(){
+    this.$q.dark.set(this.theme == 'black' ? true : false)
+  },
+  computed:{
+    theme(){
+      return this.$store.state.theme
     }
   }
 }

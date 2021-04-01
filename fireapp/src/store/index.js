@@ -9,7 +9,8 @@ export default new Vuex.Store({
     state: {
       token: localStorage.getItem('token') || '',
       phone: localStorage.getItem('phone') || '',
-      updated: false
+      updated: false,
+      theme: localStorage.getItem('theme') || ''
     },
     mutations: {
       st_ch(state, status) {
@@ -24,10 +25,14 @@ export default new Vuex.Store({
         localStorage.setItem('phone', phone)
       },
       logout(state){
-        this.phone = ''
-        this.token = ''
+        state.phone = ''
+        state.token = ''
         localStorage.removeItem('phone')
         localStorage.removeItem('token')
+      },
+      swichTheme(state){
+        state.theme = state.theme == 'black' ? 'white' : 'black'
+        localStorage.setItem('theme', state.theme == 'black' ? 'black' : 'white')
       }
     },
     actions: {

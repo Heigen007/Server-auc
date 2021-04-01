@@ -9,12 +9,10 @@
       aria-label="Menu"
       @click="leftDrawerOpen = !leftDrawerOpen"
     />
-
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      content-class="bg-grey-1"
     >
       <q-list>
         <q-item-label
@@ -23,9 +21,7 @@
           class="text-grey-8"
           style="display: flex; align-items: center; flex-direction: column"
         >
-
           <span class = "userName">{{userPhoneNumber}}</span>
-
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
@@ -33,6 +29,7 @@
           v-bind="link"
         />
         <div class="button" @click="ExitAction">Выйти</div>
+        <div class="button" @click="SwichTheme">{{theme == 'black' ? 'Дневной режим' : 'Ночной режим'}}</div>
       </q-list>
     </q-drawer>
 
@@ -82,6 +79,9 @@ export default {
     ExitAction(){
       this.$store.commit('logout')
       location.reload()
+    },
+    SwichTheme(){
+      this.$store.commit('swichTheme')
     }
   },
   computed: {
@@ -91,12 +91,15 @@ export default {
     },
     userPhoneNumber(){
       return this.$store.state.phone
+    },
+    theme(){
+      return this.$store.state.theme
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 .userName{
   margin: 1vw;
   font-size: 1.4em;
@@ -110,6 +113,7 @@ export default {
   text-align: center;
   font-weight: 800;
   color:rgb(65, 62, 62);
+  cursor: pointer;
   border: none;
   outline: none;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);

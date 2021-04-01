@@ -1,7 +1,7 @@
 <template>
   <div id="main" v-if="IsTurned" class="main">
     <div class = 'actionButton' @click = "actionButtonPressed">Вызвать Пожарных</div>
-    <div v-touch-swipe="swipeAction" class="contentBlock" id = "contentBlock" v-if="stage>1">
+    <div v-touch-swipe="swipeAction" class="contentBlock" id="contentBlock" v-if="stage>1" :style="`${Theme == 'black' ? 'background: #121212' : 'background: #fff'}`">
       <h6 class="title">Укажите адрес</h6>
       <div class = "currentPos">
         <div class="imgBx">
@@ -23,9 +23,9 @@
       <div class="sa">Поиск по месту</div>
     </div>
       <q-item-section v-if="next==true">
-        <q-icon @click.stop="closeNext" id="icon" name="arrow_back" style = "font-size: 25px;" />
+        <q-icon @click.stop="closeNext" id="icon" name="arrow_back" :style="`${Theme == 'black' ? 'background: #121212' : 'background: #fff'}; font-size: 25px;`" />
       </q-item-section>
-    <div v-if="next==true" class="contentBlockNext" id = "nextBlock">
+    <div v-if="next==true" class="contentBlockNext" id = "nextBlock" :style="`${Theme == 'black' ? 'background: #121212' : 'background: #fff'}`">
       <h6 class="title" style="text-align: center; font-size: 1.8em">Вызов Пожарных</h6>
       <div class = "currentPos">
           <h6 style = "color: red; text-align: center; font-size: 1.4em; line-height:1em">Заведомо ложный вызов влечет за собой штраф в размере тридцати месячных расчетных показателей.</h6>
@@ -102,6 +102,11 @@ export default {
       }, 550);
       document.getElementById('main').style.height = '0' 
       document.getElementById('icon').style.opacity = '0'
+    }
+  },
+  computed: {
+    Theme(){
+      return this.$store.state.theme
     }
   }
 }
