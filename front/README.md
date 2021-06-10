@@ -1,5 +1,5 @@
 # Auction
-Project, that I did on our Js course, auction (Only FrontEnd). Made on Vue
+Auction. Project, that I did on our Js course. Made on Vue. Made on Vue
 
 ## Project setup
 ```
