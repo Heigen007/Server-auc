@@ -1,4 +1,5 @@
-# front
+# Auction
+Project, that I did on our Js course, auction (Only FrontEnd). Made on Vue
 
 ## Project setup
 ```
